@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "importHelpers": true,
-    "jsx": "react",
-    "alwaysStrict": true,
+    "alwaysStrict": false,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -16,10 +15,16 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "esModuleInterop": false,
+    "emitDecoratorMetadata": true
   },
   "include": [
+    "**/*.ts",
     "src/**/*",
-    "__tests__/**/*"
+    "__tests__/**/*",
+    "**/*.config.js"
   ]
 }

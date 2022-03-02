@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@types/jest": "~27.0.2",
-    "@types/node": "~16.11.6",
+    "@types/node": "^16.11.24",
     "@typescript-eslint/eslint-plugin": "~5.7.0",
     "@typescript-eslint/parser": "~5.7.0",
     "eslint": "~8.4.1",
@@ -21,7 +21,7 @@
     "typescript": "~4.5.3"
   },
   "scripts": {
-    "start": "node build/src/main.js",
+    "start": "node build/src/index.js",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.release.json",
@@ -33,7 +33,11 @@
   "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "tslib": "~2.3.1"
+    "node-rtsp-recorder": "^1.0.3",
+    "node-watch": "^0.7.3",
+    "pg": "^8.7.3",
+    "tslib": "~2.3.1",
+    "typeorm": "^0.2.41"
   },
   "volta": {
     "node": "16.13.0"
