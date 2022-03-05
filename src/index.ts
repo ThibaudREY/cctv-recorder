@@ -4,8 +4,8 @@ import {Recorder} from 'node-rtsp-recorder';
 import watch from 'node-watch';
 import {Recording} from "./entity/Recording";
 import * as moment from "moment";
+import * as fs from "fs";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment
 const config: {feed_url: string} = require('../appconfig.json');
 
 void (async () => {
@@ -20,10 +20,13 @@ void (async () => {
 
     if (updatedPath !== null && path !== updatedPath) {
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
-      const ago = moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS')
+      (await recordingRepository.find({
+        date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
+      })).forEach((r: Recording) => {
+        fs.unlinkSync(`videos/${r.path}`)
+      });
       await recordingRepository.delete({
-          date: LessThan(ago)
+          date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
       });
 
       const recording = new Recording();
@@ -36,9 +39,7 @@ void (async () => {
     }
   });
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   (new Recorder({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     url: config.feed_url,
     timeLimit: 60, // time in seconds for each segmented video file
     folder: 'videos',
