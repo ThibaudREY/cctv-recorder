@@ -6,6 +6,6 @@ WORKDIR /root/
 
 RUN npm i && npm i -g ts-node
 
-ENTRYPOINT bash -c "ts-node index.ts"
+ENTRYPOINT bash -c "ts-node src/index.ts"
 
 
