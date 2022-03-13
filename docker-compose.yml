@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+  registry:
+    restart: always
+    build: .
+    user: "root:wheel"
+    volumes:
+      - data:/root/videos 
+      - type: bind 
+        source: /home/ubuntu/cctv-recorder/appconfig.json
+        target: /root/appconfig.json
+      - type: bind
+        source: /home/ubuntu/cctv-recorder/ormconfig.json
+        target: /root/ormconfig.json
+
+volumes:
+  data:
+    driver_opts:
+      type: "nfs4"
+      o: "addr=192.168.0.2,vers=3,nolock,soft,rw"
+      device: ":/mnt/data_pool/cctv-camera"

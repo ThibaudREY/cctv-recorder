@@ -1,6 +1,6 @@
 {
    "type": "postgres",
-   "host": "192.168.0.199",
+   "host": "192.168.0.3",
    "port": 5432,
    "username": "camera",
    "password": "Camera2022@",

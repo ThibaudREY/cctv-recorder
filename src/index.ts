@@ -13,7 +13,8 @@ void (async () => {
   const connection: Connection = await createConnection();
   const recordingRepository = connection.getRepository(Recording);
 
-  watch('videos', {recursive: true}, async function (_evt, path) {
+  watch('/root/videos', {recursive: true}, async function (_evt, path) {
+ 
     if (updatedPath === null) {
       updatedPath = path;
     }
@@ -33,7 +34,12 @@ void (async () => {
       recording.path = updatedPath;
       recording.camera = 1;
 
-      await recordingRepository.save(recording);
+      await connection
+                .createQueryBuilder()
+                .insert()
+                .into(Recording)
+                .values([recording])
+                .execute();
 
       updatedPath = path;
     }
