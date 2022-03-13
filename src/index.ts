@@ -6,7 +6,7 @@ import {Recording} from "./entity/Recording";
 import * as moment from "moment";
 import * as fs from "fs";
 
-const config: {feed_url: string} = require('../appconfig.json');
+const config: {feed_url: string, id: number} = require('../appconfig.json');
 
 void (async () => {
   let updatedPath: string = null;
@@ -14,7 +14,7 @@ void (async () => {
   const recordingRepository = connection.getRepository(Recording);
 
   watch('/root/videos', {recursive: true}, async function (_evt, path) {
- 
+
     if (updatedPath === null) {
       updatedPath = path;
     }
@@ -32,7 +32,7 @@ void (async () => {
 
       const recording = new Recording();
       recording.path = updatedPath;
-      recording.camera = 1;
+      recording.camera = config.id;
 
       await connection
                 .createQueryBuilder()
