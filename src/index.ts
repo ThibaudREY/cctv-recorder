@@ -49,7 +49,7 @@ void (async () => {
     url: config.feed_url,
     timeLimit: 60, // time in seconds for each segmented video file
     folder: 'videos',
-    name: 'cam1',
+    name: `cam${config.id}`,
     directoryPathFormat: '',
   })).startRecording();
 })();
