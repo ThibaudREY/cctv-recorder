@@ -32,7 +32,6 @@
   "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "node-rtsp-recorder": "^1.0.3",
     "node-watch": "^0.7.3",
     "pg": "^8.7.3",
     "tslib": "~2.3.1",

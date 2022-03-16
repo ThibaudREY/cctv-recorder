@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import {Connection, createConnection, LessThan} from 'typeorm';
-import {Recorder} from 'node-rtsp-recorder';
+import {Recorder} from './lib/node-rtsp-recorder/src';
 import watch from 'node-watch';
 import {Recording} from "./entity/Recording";
 import * as moment from "moment";
