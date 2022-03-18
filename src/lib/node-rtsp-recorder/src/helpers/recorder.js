@@ -60,7 +60,7 @@ const RTSPRecorder = class {
     if (this.categoryType === 'image') {
       return ['-vframes', '1']
     }
-    return ['-vf', 'setpts=PTS-STARTPTS', '-an', '-vcodec', 'libx265', '-crf', '27', '-tag:v', 'hvc1', '-preset', 'ultrafast']
+    return ['-vf', 'setpts=PTS-STARTPTS', '-an', '-vcodec', 'libx265', '-crf', '28', '-tag:v', 'hvc1', '-preset', 'ultrafast', '-t', '00:01:00']
   }
 
   getChildProcess(fileName) {
@@ -145,7 +145,6 @@ const RTSPRecorder = class {
       }
       self.recordStream()
     })
-    this.timer = setTimeout(self.killStream.bind(this), this.timeLimit * 1000)
 
     console.log('Start record ' + fileName)
   }
