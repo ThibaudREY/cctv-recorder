@@ -16,6 +16,7 @@ const RTSPRecorder = class {
   constructor(config = {}) {
     this.config = config
     this.name = config.name
+    this.args = config.args
     this.url = config.url
     this.timeLimit = config.timeLimit || 60
     this.folder = config.folder || 'media/'
@@ -60,7 +61,7 @@ const RTSPRecorder = class {
     if (this.categoryType === 'image') {
       return ['-vframes', '1']
     }
-    return ['-vf', 'setpts=PTS-STARTPTS', '-an', '-vcodec', 'libx265', '-crf', '28', '-tag:v', 'hvc1', '-preset', 'ultrafast', '-t', '00:01:00']
+    return this.args
   }
 
   getChildProcess(fileName) {

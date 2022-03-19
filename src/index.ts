@@ -6,7 +6,7 @@ import {Recording} from "./entity/Recording";
 import * as moment from "moment";
 import * as fs from "fs";
 
-const config: {feed_url: string, id: number} = require('../appconfig.json');
+const config: {feed_url: string, id: number, args: string[]} = require('../appconfig.json');
 
 void (async () => {
   let updatedPath: string = null;
@@ -46,8 +46,8 @@ void (async () => {
   });
 
   (new Recorder({
+    args: config.args,
     url: config.feed_url,
-    timeLimit: 60, // time in seconds for each segmented video file
     folder: 'videos',
     name: `cam${config.id}`,
     directoryPathFormat: '',
