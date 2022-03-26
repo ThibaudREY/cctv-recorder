@@ -61,11 +61,11 @@ const RTSPRecorder = class {
     if (this.categoryType === 'image') {
       return ['-vframes', '1']
     }
-    return this.args
+    return ['-acodec', 'copy', '-vcodec', 'copy']
   }
 
   getChildProcess(fileName) {
-    var args = ['-i', this.url, ...this.config.args]
+    var args = ['-i', this.url, ...this.args]
     const mediaArgs = this.getArguments()
     mediaArgs.forEach((item) => {
       args.push(item)
@@ -146,6 +146,7 @@ const RTSPRecorder = class {
       }
       self.recordStream()
     })
+    this.timer = setTimeout(self.killStream.bind(this), this.timeLimit * 1000)
 
     console.log('Start record ' + fileName)
   }
