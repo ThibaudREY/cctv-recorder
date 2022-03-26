@@ -65,7 +65,7 @@ const RTSPRecorder = class {
   }
 
   getChildProcess(fileName) {
-    var args = ['-re', '-i', this.url]
+    var args = ['-i', this.url, ...this.config.args]
     const mediaArgs = this.getArguments()
     mediaArgs.forEach((item) => {
       args.push(item)
