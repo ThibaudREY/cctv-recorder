@@ -61,7 +61,7 @@ const RTSPRecorder = class {
     if (this.categoryType === 'image') {
       return ['-vframes', '1']
     }
-    return ['-a:n', '-vcodec', 'copy']
+    return ['-an', '-vcodec', 'copy']
   }
 
   getChildProcess(fileName) {
