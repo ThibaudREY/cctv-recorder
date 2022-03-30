@@ -19,7 +19,7 @@ void (async () => {
       updatedPath = path;
     }
 
-    if (updatedPath !== null && path !== updatedPath) {
+    if (updatedPath !== null && path !== updatedPath && updatedPath.includes(`cam${config.id}`)) {
 
       (await recordingRepository.find({
         date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
