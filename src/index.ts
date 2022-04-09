@@ -19,16 +19,16 @@ void (async () => {
       updatedPath = path;
     }
 
-    if (updatedPath !== null && path !== updatedPath && updatedPath.includes(`cam${config.id}`)) {
+    (await recordingRepository.find({
+      date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
+    })).forEach((r: Recording) => {
+      fs.unlinkSync(r.path)
+    });
+    await recordingRepository.delete({
+      date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
+    });
 
-      (await recordingRepository.find({
-        date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
-      })).forEach((r: Recording) => {
-        fs.unlinkSync(`videos/${r.path}`)
-      });
-      await recordingRepository.delete({
-          date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
-      });
+    if (updatedPath !== null && path !== updatedPath && updatedPath.includes(`cam${config.id}`)) {
 
       const recording = new Recording();
       recording.path = updatedPath;
