@@ -22,7 +22,8 @@ void (async () => {
     (await recordingRepository.find({
       date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
     })).forEach((r: Recording) => {
-      fs.unlinkSync(r.path)
+      console.log(r.path);
+      fs.unlink(r.path, null);
     });
     await recordingRepository.delete({
       date: LessThan(moment(moment.now()).subtract(2, 'weeks').format('YYYY-MM-DD HH:mm:ss.SSSSSS'))
